@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
+  <title>Час до літа</title>
+  <style>
+    body {
+      display: flex;
+      font-family: "Poppins", serif;
+      font-weight: 200;
+      font-style: normal;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background: #000;
+      color: rgb(255, 255, 255);
+      margin: 0;
+    }
+
+    .container {
+      text-align: center;
+    }
+
+    .progress-bar {
+      width: 300px;
+      height: 8px;
+      background: #ccc;
+      border: 1px solid #fff;
+      overflow: hidden;
+      margin: 0 auto;
+    }
+
+    .progress {
+      height: 100%;
+      background: #000;
+      width: 0;
+      transition: width 0.5s ease;
+    }
+
+    .percent {
+      font-family: "Poppins", serif;
+      font-weight: 300;
+      font-size: 1em;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="progress-bar">
+      <div class="progress" id="progress"></div>
+    </div>
+    <div class="percent" id="percent">0%</div>
+  </div>
+
+  <script>
+    function updateProgress() {
+      const now = new Date();
+      const startOfYear = new Date(now.getFullYear(), 0, 1); // 1 січня
+      const startOfSummer = new Date(now.getFullYear(), 5, 1); // 1 червня
+      const elapsed = now - startOfYear;
+      const total = startOfSummer - startOfYear;
+      const percentage = (elapsed / total * 100).toFixed(2);
+
+      const progress = document.getElementById('progress');
+      const percent = document.getElementById('percent');
+
+      // Оновлюємо прогрес і текст
+      progress.style.width = percentage + '%';
+      percent.textContent = percentage + '%';
+    }
+
+    updateProgress();
+    setInterval(updateProgress, 60000); 
+  </script>
+</body>
+
+
+</html>
